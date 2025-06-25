@@ -83,9 +83,9 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
 
 
 
-  // This is the gameState. It will controll how the game progresses and what 
-  // the game logic for the current state is.
-  int gameState = 0;
+  // This is the current game state which controls how the game progresses and
+  // determines which logic branch should run.
+  GameState gameState = GameState.HOME;
 
 
 
@@ -352,7 +352,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
      */
     
     
-    if(gameState == 0)
+    if(gameState == GameState.HOME)
     {
         // Drawings for background.
         g.drawImage(nightSky, nightSkyX, 0, 1040, 693, null);
@@ -394,7 +394,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
             fadeSwitchState(g, 1, 1); // second parameter is part and third is speed.
         }
     }
-    else if(gameState == 1)
+    else if(gameState == GameState.CHOOSE_CHARACTER)
     {
         // Backgrond
         g.setColor(Color.BLACK);
@@ -432,12 +432,12 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
             fadeSwitchState(g, 1, 2);
         }
     }
-    else if(gameState == 2)
+    else if(gameState == GameState.TUNNEL)
     {
         // Re-adjust character for game start.
         if(stage2Adjustments)
         {
-            rearrangeCharacter(2);
+            rearrangeCharacter(GameState.TUNNEL);
         }
         
         // Moving tunnel drawings.
@@ -468,7 +468,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
             }
         }
     }
-    else if(gameState == 3)
+    else if(gameState == GameState.PORTAL_DIALOGUE)
     {
         // Reset character Y if jumped in previous state
         characterY = 230;
@@ -486,7 +486,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
         g.drawImage(enterKey, 490, 173, 100, 50, null);
         
     }
-    else if(gameState == 4)
+    else if(gameState == GameState.PORTAL_CUTSCENE)
     {
         // Reset character Y if jumped in previous state
         characterY = 230;
@@ -528,7 +528,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
             fadeSwitchState(g, 1, 2);
         }
     }
-    else if(gameState == 5)
+    else if(gameState == GameState.PREFIGHT)
     {
         // Draw the trippy moving background.
         int frameB = (int)prefightBackdropSpeed;
@@ -561,7 +561,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
             }
         }
     }
-    else if(gameState == 6)
+    else if(gameState == GameState.HEAVEN)
     {
         // End timer from previous state.
         startTimer = false;
@@ -574,7 +574,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
         // Adjust characters.
         if(stage6Adjustments)
         {
-            rearrangeCharacter(6);
+            rearrangeCharacter(GameState.HEAVEN);
         }
         
         // Basic UI methods.
@@ -598,7 +598,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
             }
         }
     }
-    else if(gameState == 7)
+    else if(gameState == GameState.ZEUS_INTERACTION)
     {
         // Reset player Y if jumped previous state.
         characterY = 300;
@@ -627,7 +627,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
             startFading = true;
         }
     }
-    else if(gameState == 8)
+    else if(gameState == GameState.FIGHT_CUTSCENE)
     {
         // Cutscene fight screen.
         g.drawImage(fightScreen, 0, 0, 800, 500, null);
@@ -647,7 +647,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
             fadeSwitchState(g, 1, 3);
         }
     }
-    else if(gameState == 9)
+    else if(gameState == GameState.BOSS_FIGHT)
     {
         // Draw heaven again (I should really make a method for drawing heaven).
         g.drawImage(heavenBackdrop, 0, 0, 800, 533, null);
@@ -657,7 +657,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
         // Adjust characters.
         if(stage8Adjustments)
         {
-            rearrangeCharacter(8);
+            rearrangeCharacter(GameState.FIGHT_CUTSCENE);
         }
         
         // Basic UI
@@ -682,7 +682,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
             }
         }
     }
-    else if(gameState == 10)
+    else if(gameState == GameState.DEATH_ANIMATION)
     {
         // If you lose boss fight you end up here and these are the dead animations.
         
@@ -714,7 +714,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
         }
         
     }
-    else if(gameState == 12)
+    else if(gameState == GameState.WIN_ANIMATION)
     {
         // You end up here if you win.
         
@@ -751,7 +751,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
             fadeSwitchState(g, 1, 3);
         }
     }
-    else if(gameState == 13)
+    else if(gameState == GameState.WIN_SCREEN)
     {
         // This is win/Lose state, play again button is present.
         
@@ -772,7 +772,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
         }
         
     }
-    else if(gameState == 11)
+    else if(gameState == GameState.LOSE_SCREEN)
     {
         // This is win/Lose state, play again button is present.
        
@@ -838,7 +838,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
       // You win.
       if(keyPressed[KeyEvent.VK_K])
       {
-          gameState = 12;
+          gameState = GameState.WIN_ANIMATION;
       }
   }
   public void drawHealth(Graphics g)
@@ -941,7 +941,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
         if(screenTransparency >= 252)
         {
             reverseFade = true;
-            gameState++;
+            gameState = GameState.values()[gameState.ordinal() + 1];
             fadingDone = false;
         }
     }
@@ -966,10 +966,10 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
     return false;
   }
 
-  public void rearrangeCharacter(int state)
+  public void rearrangeCharacter(GameState state)
   {
       // ADJUST THE VARIABLE BASED FOR STATE.
-      if(state == 2)
+      if(state == GameState.TUNNEL)
       {
           stage2Adjustments = false;
           characterX = 178;
@@ -984,7 +984,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
           
       }
       // ADJUST THE VARIABLE BASED FOR STATE.
-      if(state == 6)
+      if(state == GameState.HEAVEN)
       {
           stage6Adjustments = false;
           characterX = 100;
@@ -993,7 +993,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
           characterHeight = 130;
       }
       // ADJUST THE VARIABLE BASED FOR STATE.
-      if(state == 8)
+      if(state == GameState.FIGHT_CUTSCENE)
       {
           stage8Adjustments = false;
           characterX = 100;
@@ -1200,7 +1200,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
      
      
       // RESET ALL VARIABLES IF THE GAME IS PLAYED AGAIN. (I HAD TO DO THIS BECAUSE WITHOUT IT, TOO MANY BUGS).
-      if(gameState == -1)
+      if(gameState == GameState.RESET)
       {
           boolean skyGoingRight = true;
           movingTunnel = false;
@@ -1253,9 +1253,9 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
           boltDone = false;
           c1FallSpeed = 0;
           onAgainButton = false;
-          gameState++;
+          gameState = GameState.values()[gameState.ordinal() + 1];
       }
-      if(gameState == 0)
+      if(gameState == GameState.HOME)
       {
           // Moving bricks (ignore word sky).
           frameCount++;
@@ -1283,7 +1283,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
           }
           
       }
-      else if(gameState == 1)
+      else if(gameState == GameState.CHOOSE_CHARACTER)
       {
           // ALL GAME LOGIC FOR Choose character Screen.
           if(keyPressed[KeyEvent.VK_ENTER])
@@ -1291,7 +1291,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
               startFading = true;
           }
       }
-      else if(gameState == 2)
+      else if(gameState == GameState.TUNNEL)
       {
           if(characterX >= 450)
           {
@@ -1361,7 +1361,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
           // If so, add gameState and initiate cutscene.
           if(nearPortal)
           {
-              gameState++;
+              gameState = GameState.values()[gameState.ordinal() + 1];
           }
           
           // Portal Animations.
@@ -1379,7 +1379,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
           
           
       }
-      else if(gameState == 3)
+      else if(gameState == GameState.PORTAL_DIALOGUE)
       {
           
           // Update portal animation.
@@ -1392,12 +1392,12 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
           // Next gamestate if character finished interacting with portal.
           if(keyPressed[KeyEvent.VK_ENTER])
           {
-              gameState = 4;
+              gameState = GameState.PORTAL_CUTSCENE;
               cutsceneWalking = true;
           }
           
       }
-      else if(gameState == 4)
+      else if(gameState == GameState.PORTAL_CUTSCENE)
       {
           
           // Cutscene moving for character.
@@ -1461,7 +1461,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
           
           
       }
-      else if(gameState == 5)
+      else if(gameState == GameState.PREFIGHT)
       {
           // Reset characterX. I had a bug and it should work without 
           // the line below but the program crashes at gamestate 6.
@@ -1493,7 +1493,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
               onFightButton = false;
           }
       }
-      else if(gameState == 6)
+      else if(gameState == GameState.HEAVEN)
       {
           // All jumping and moving mechanisms.
           sideMovementMechanism();
@@ -1510,10 +1510,10 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
           // If character approach zeus, initiate interaction state,
           if(characterX >= 460)
           {
-              gameState++;
+              gameState = GameState.values()[gameState.ordinal() + 1];
           }
       }
-      else if(gameState == 7)
+      else if(gameState == GameState.ZEUS_INTERACTION)
       {
           // Update zeus.
           zeusSpeed += 0.2;
@@ -1522,7 +1522,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
               zeusSpeed = 0;
           }
       }
-      else if(gameState == 8)
+      else if(gameState == GameState.FIGHT_CUTSCENE)
       {
           // Show off fight cutscene for few seconds.
           if(secondsPassed == 9)
@@ -1530,7 +1530,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
               startFading = true;
           }
       }
-      else if(gameState == 9)
+      else if(gameState == GameState.BOSS_FIGHT)
       {
           // THIS IS THE BOSS FIGHT LOGIC.
           
@@ -1547,7 +1547,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
           }
           if(gameOver)
           {
-              gameState = 10;
+              gameState = GameState.DEATH_ANIMATION;
           }
           
           if(secondsPassed == 20)
@@ -1555,7 +1555,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
               specialAttack = true;
           }
       }
-      else if(gameState == 10)
+      else if(gameState == GameState.DEATH_ANIMATION)
       {
           // Start timer to fall and reset character Y
           if(!characterDead)
@@ -1588,7 +1588,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
               startFading = true;
           }
       }
-      else if(gameState == 12)
+      else if(gameState == GameState.WIN_ANIMATION)
       {
           // Does same as the dying logic but except character dead, its bolt done
           // and differnt directory state (win or lose).
@@ -1620,11 +1620,11 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
           }
           
       }
-      else if(gameState == 13) // YOU WIN
+      else if(gameState == GameState.WIN_SCREEN) // YOU WIN
       {
           
       }
-      else if(gameState == 11) // YOU LOSE
+      else if(gameState == GameState.LOSE_SCREEN) // YOU LOSE
       {
           
       }
@@ -1694,14 +1694,14 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
     mousePressed[e.getButton()] = true;
     
     // if on homescreen and play button is pressed.
-    if(gameState == 0)
+    if(gameState == GameState.HOME)
     {
         if(onPlayButton)
         {
             startFading = true;
         }
     }
-    if(gameState == 5)
+    if(gameState == GameState.PREFIGHT)
     {
         // if fight button is pressed.
         if(onFightButton)
@@ -1710,7 +1710,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
         }
     }
     // incremental narration.
-    if(gameState == 7)
+    if(gameState == GameState.ZEUS_INTERACTION)
     {
         if(charTurn != 10)
         {
@@ -1727,11 +1727,11 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
         }
     }
     // Play again button.
-    if(gameState == 11 || gameState == 13)
+    if(gameState == GameState.LOSE_SCREEN || gameState == GameState.WIN_SCREEN)
     {
         if(onAgainButton)
         {
-            gameState = -1;
+            gameState = GameState.RESET;
         }
     }
   }
