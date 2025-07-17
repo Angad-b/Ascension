@@ -97,8 +97,8 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
   
   
   // These are variables part of the Homescreen where the Playbutton is.
-  BufferedImage playButton = loadImage("PlayButton.png");
-  BufferedImage playButtonClicked = loadImage("PlayButtonClicked.png");
+  BufferedImage playButton = loadImage("OtherAssets/PlayButton.png");
+  BufferedImage playButtonClicked = loadImage("OtherAssets/PlayButtonClicked.png");
   int playButtonX = 275;
   int playButtonWidth = 250;
   int playButtonY = 125;
@@ -107,42 +107,42 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
   // The following 5 variables are to control the moving background.
   int frameCount = 0;
   int skySpeed = 4;
-  BufferedImage nightSky = loadImage("HomescreenBackdrop.png");
+  BufferedImage nightSky = loadImage("OtherAssets/HomescreenBackdrop.png");
   int nightSkyX = 0;
   boolean skyGoingRight = true;
-  BufferedImage zeusHomescreen = loadImage("ZeusHomescreen.png");
+  BufferedImage zeusHomescreen = loadImage("OtherAssets/ZeusHomescreen.png");
   // The game logo.
-  BufferedImage logo = loadImage("AscensionLogo.png");
+  BufferedImage logo = loadImage("OtherAssets/AscensionLogo.png");
   
   
   // These are variables part of "Choose your character" screen.
-  BufferedImage chooseCharacter = loadImage("Choose.png");
-  BufferedImage left = loadImage("left.png");
-  BufferedImage right = loadImage("right.png");
-  BufferedImage wasd = loadImage("WASD.png");
-  BufferedImage toMove = loadImage("ToMove.png");
-  
-  
+  BufferedImage chooseCharacter = loadImage("OtherAssets/Choose.png");
+  BufferedImage left = loadImage("OtherAssets/left.png");
+  BufferedImage right = loadImage("OtherAssets/right.png");
+  BufferedImage wasd = loadImage("OtherAssets/WASD.png");
+  BufferedImage toMove = loadImage("OtherAssets/ToMove.png");
+
+
   
   // These are variables for keyboard relation sprites and control menu.
   BufferedImage leftKey = loadImage("Keyboard/leftKey.png");
   BufferedImage rightKey = loadImage("Keyboard/rightKey.png");
-  BufferedImage changeCharacter = loadImage("changeCharacter.png");
-  BufferedImage enterKey = loadImage("enterKey.png");
-  BufferedImage startGame = loadImage("startGame.png");
-  BufferedImage controlTips = loadImage("controlTips.png");
-  BufferedImage showControls = loadImage("ShowControls.png");
-  BufferedImage keyP = loadImage("PKey.png");
-  BufferedImage hideControls = loadImage("HideControls.png");
-  BufferedImage controlMenu = loadImage("ControlMenu.png");
-  BufferedImage blur = loadImage("Blur.png");
+  BufferedImage changeCharacter = loadImage("OtherAssets/changeCharacter.png");
+  BufferedImage enterKey = loadImage("OtherAssets/enterKey.png");
+  BufferedImage startGame = loadImage("OtherAssets/startGame.png");
+  BufferedImage controlTips = loadImage("OtherAssets/controlTips.png");
+  BufferedImage showControls = loadImage("OtherAssets/ShowControls.png");
+  BufferedImage keyP = loadImage("OtherAssets/PKey.png");
+  BufferedImage hideControls = loadImage("OtherAssets/HideControls.png");
+  BufferedImage controlMenu = loadImage("OtherAssets/ControlMenu.png");
+  BufferedImage blur = loadImage("OtherAssets/Blur.png");
   boolean controlsVisible = false;
   
   
   // These are variables for the tunnel stage of game.
-  BufferedImage bed = loadImage("bed.png");
-  BufferedImage cabin = loadImage("metalTunnelBackdrop.png"); // Ignore the name cabin; too lazy to change.
-  BufferedImage character = loadImage("Character.png");
+  BufferedImage bed = loadImage("OtherAssets/bed.png");
+  BufferedImage cabin = loadImage("OtherAssets/metalTunnelBackdrop.png"); // Ignore the name cabin; too lazy to change.
+  BufferedImage character = loadImage("OtherAssets/Character.png");
   // Tunnel movement related variables.
   boolean movingTunnel = false;
   boolean reverseMovingTunnel = false;
@@ -153,7 +153,7 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
   // The following are animations for the character to be able to move.
   BufferedImage[] c1Walk = new BufferedImage[8];
   BufferedImage[] c1Fall = new BufferedImage[8];
-  BufferedImage character1 = loadImage("Character.png");
+  BufferedImage character1 = loadImage("OtherAssets/Character.png");
   double c1WalkSpeed = 0;
   int tunnelX = 0;
   int tunnelX2 = tunnelX + 750;
@@ -167,9 +167,9 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
   // The following are variables for the portal animation and cutscene.
   BufferedImage[] portal = new BufferedImage[7];
   double portalSpeed = 0;
-  BufferedImage portalBack = loadImage("portalBack.png");
+  BufferedImage portalBack = loadImage("OtherAssets/portalBack.png");
   boolean nearPortal = false;
-  BufferedImage portalBubble = loadImage("PortalBubble.png");
+  BufferedImage portalBubble = loadImage("OtherAssets/PortalBubble.png");
   boolean cutsceneWalking = false;
   BufferedImage[] c1Fade = new BufferedImage[8];
   boolean characterFade = false;
@@ -199,14 +199,14 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
   boolean jumping = false;
   
   // Sprite for heart picture.
-  BufferedImage heart = loadImage("Heart.png");
+  BufferedImage heart = loadImage("OtherAssets/Heart.png");
 
  
   // These variables for prefight - gameState 5
   BufferedImage[] prefightBackdrop = new BufferedImage[6];
   double prefightBackdropSpeed = 0;
-  BufferedImage fightButton = loadImage("FightButton.png");
-  BufferedImage fightButtonClicked = loadImage("FightButtonClicked.png");
+  BufferedImage fightButton = loadImage("OtherAssets/FightButton.png");
+  BufferedImage fightButtonClicked = loadImage("OtherAssets/FightButtonClicked.png");
   boolean onFightButton = false;
   int fightButtonX = 620;
   int fightButtonY = 360;
@@ -221,23 +221,23 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
   boolean fadingDone = false;
   
   // These are variables part of gameState 7 (Interaction with old man).
-  BufferedImage heavenBackdrop = loadImage("Heaven.png");
-  BufferedImage cloud = loadImage("Cloud.png");
+  BufferedImage heavenBackdrop = loadImage("OtherAssets/Heaven.png");
+  BufferedImage cloud = loadImage("OtherAssets/Cloud.png");
   boolean stage6Adjustments = true;
   int heavenGround = 430;
-  BufferedImage heavenFloor = loadImage("HeavenFloor.png");
+  BufferedImage heavenFloor = loadImage("OtherAssets/HeavenFloor.png");
   BufferedImage[] zeusIdle = new BufferedImage[4];
   BufferedImage[] zeusRun = new BufferedImage[4];
   double zeusSpeed = 0;
-  BufferedImage characterHead = loadImage("CharacterHead.png");
-  BufferedImage zeusHead = loadImage("ZeusHead.png");
+  BufferedImage characterHead = loadImage("OtherAssets/CharacterHead.png");
+  BufferedImage zeusHead = loadImage("OtherAssets/ZeusHead.png");
   
   // Narration variables.
   int nar = 1;
   int charTurn = 1;
   
   // Variables for gameState 8.
-  BufferedImage fightScreen = loadImage("FightScreen.png");
+  BufferedImage fightScreen = loadImage("OtherAssets/FightScreen.png");
   boolean stage8Adjustments = true;
   
   // These are variables for the endgame of the game.
@@ -248,16 +248,16 @@ public class MyProgram extends JPanel implements KeyListener, MouseListener, Mou
   boolean gameOver = false;
   boolean characterDead = false;
   boolean specialAttack = false;
-  BufferedImage kKey = loadImage("Kkey.png");
-  BufferedImage pressMe = loadImage("specialAttack.png");
+  BufferedImage kKey = loadImage("OtherAssets/Kkey.png");
+  BufferedImage pressMe = loadImage("OtherAssets/specialAttack.png");
   BufferedImage[] darkBolt = new BufferedImage[12];
   double boltSpeed = 0;
   boolean boltDone = false;
-  BufferedImage gameWon = loadImage("GameWon.png");
-  BufferedImage gameLost = loadImage("GameLost.png");
+  BufferedImage gameWon = loadImage("OtherAssets/GameWon.png");
+  BufferedImage gameLost = loadImage("OtherAssets/GameLost.png");
   double c1FallSpeed = 0;
-  BufferedImage again = loadImage("Again.png");
-  BufferedImage againClick = loadImage("AgainClick.png");
+  BufferedImage again = loadImage("OtherAssets/Again.png");
+  BufferedImage againClick = loadImage("OtherAssets/AgainClick.png");
   boolean onAgainButton = false;
   int againX = 370;
   int againY = 200;
